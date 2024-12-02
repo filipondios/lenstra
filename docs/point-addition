@@ -1,0 +1,42 @@
+Considering a elliptic curve y² = x³ + ax + b, which satisfies the 
+expression 16 (4a³ + 27b²) != 0.
+
+The elliptic curve addition for two points P = (xp,yp) and Q = (xq,yq)
+results in a point R = (xr,yr). The coordinates of R are calculated
+following the rules below:
+
+IF xp != xq
+-----------
+
+s = (yp - yq)/(xp - xq)
+xr = s² - xp - xq
+yr = yp - s(xp - xr)
+
+IF xp == xq
+-----------
+
+  IF yp = -yq, including 0
+  ------------------------
+  
+  zero (O)
+
+  IF yp = yq != 0
+  ---------------
+
+  s = (3xp² + b)/2yp
+  xr = s² - 2xp
+  yr = yp - s(xp - xr)
+
+
+For the Lenstra algorithm, we can think that the first case where 
+xp != xq can be ignored and the case where xp == xq && yp = -yq
+can be also ignored because we will be calculating k*P where 
+k is a natural number (> 0) and k*P = P + P + P ... k times,
+having both points P and Q defined above as P=Q, so the addition 
+will never satisfy the mentioned conditions.
+
+However, we can optimize the number of point additions by using 
+associativity, avoiding O(k) complexity. This optimization, 
+described at the '@point-addition-optimization' article will be 
+using all the rules described in this article since we will be 
+doing the addition of different points.

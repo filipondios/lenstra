@@ -1,4 +1,3 @@
-
 exception NotCoprimes
 
 let rec extended_euclides r_old r_new s_old s_new t_old t_new =
@@ -21,25 +20,26 @@ type ec_point =
   | Zero
   | ECP of (int64 * int64)
 
-let sum_pts (p: ec_point) (q: ec_point) b n =
+
+let sum_pts (p: ec_point) (q: ec_point) a n =
   match p, q with
   | Zero, q -> q
   | p, Zero -> p 
-  | ECP (xp, yp), ECP (xq, yq) -> 
-    if xp <> xq then
-      let s  = Int64.rem (Int64.mul (Int64.sub yp yp) (inv_mod (Int64.sub xp xq) n)) n in
-      let xr = Int64.rem (Int64.sub (Int64.sub (Int64.mul s s) xp) xq)  n in
-      let yr = Int64.rem (Int64.sub yp (Int64.mul s (Int64.sub xp xr))) n in
-      ECP (xr, yr)
+  | ECP (px, py), ECP (qx, qy) ->
+    if px <> qx then
+      let s  = Int64.rem (Int64.mul (Int64.sub py qy) (inv_mod (Int64.sub px qx) n)) n in
+      let rx = Int64.rem (Int64.sub (Int64.sub (Int64.mul s s) px) qx) n in
+      let ry = Int64.rem (Int64.neg (Int64.add (Int64.mul (Int64.sub rx px) s) py)) n in
+      ECP (rx, ry)
     else 
-      if yp = Int64.neg yq then
+      if py = Int64.neg qy then
         Zero
       else
-        let s  = Int64.rem (Int64.div ((Int64.mul xp xp |> Int64.mul xp |> Int64.mul 3L) |> 
-          Int64.add b) (inv_mod (Int64.mul yp 2L) n)) n in 
-        let xr = Int64.rem (Int64.sub (Int64.sub (Int64.mul s s) xp) xq)  n in
-        let yr = Int64.rem (Int64.sub yp (Int64.mul s (Int64.sub xp xr))) n in
-        ECP (xr, yr)
+        let s  = Int64.rem (Int64.mul (Int64.add (Int64.mul (Int64.mul px px) 3L) a) (inv_mod (Int64.mul py 2L) n)) n in
+        let rx = Int64.rem (Int64.sub (Int64.sub (Int64.mul s s) px) qx) n in
+        let ry = Int64.rem (Int64.neg (Int64.add (Int64.mul (Int64.sub rx px) s) py)) n in
+        ECP (rx, ry)
+
 
 let ecp_to_string p = 
   match p with
@@ -48,19 +48,7 @@ let ecp_to_string p =
 
 
 let () =
-  let (_, b, n) = (2L, 3L, 97L) in
+  let (a, _, n) = (2L, 3L, 97L) in
   let p = (17L, 10L) in
   let q = (95L, 31L) in
-  ecp_to_string (sum_pts (ECP p) (ECP q) b n) |> print_string
-
-
-(*  
-  b = 7
-  n = 37
-  (xp,yp) = (6,1)
-  (xq,yq) = (8,1)
-  
-  s  = (yp - yq) * inv(xp-xq) = (1 - 1) * inv(...) = 0
-  xr = 0 - xp - xq = -6 -8 = -14
-  yr = 1 
-*)
+  ecp_to_string (sum_pts (ECP p) (ECP q) a n) |> print_string

@@ -10,7 +10,7 @@ IF xp != xq
 
 s = (yp - yq)/(xp - xq)
 xr = s² - xp - xq
-yr = yp - s(xp - xr)
+yr = -(yp - s(xp - xr))
 
 IF xp == xq
 -----------
@@ -23,9 +23,9 @@ IF xp == xq
   IF yp = yq != 0
   ---------------
 
-  s = (3xp² + b)/2yp
+  s = (3xp² + a)/2yp
   xr = s² - 2xp
-  yr = yp - s(xp - xr)
+  yr = -(yp - s(xp - xr))
 
 
 For the Lenstra algorithm, we can think that the first case where 

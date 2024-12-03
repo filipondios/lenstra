@@ -1,5 +1,14 @@
+[Basics]
 https://www.rareskills.io/post/group-theory
+
+[Point Addition]
+https://en.wikipedia.org/wiki/Elliptic_curve
+https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
+https://andrea.corbellini.name/ecc/interactive/reals-add.html
 https://www.rareskills.io/post/elliptic-curve-addition
+
+[Point Scalar Multiplication (Not revised atp)]
+https://en.wikipedia.org/wiki/Elliptic_curve_point_multiplication
 https://www.mdpi.com/2227-7390/12/6/881
 https://ieeexplore.ieee.org/document/7194842
 https://link.springer.com/article/10.1007/s11227-023-05428-4

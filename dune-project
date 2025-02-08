@@ -1,26 +1,15 @@
 (lang dune 3.16)
-
 (name lenstra)
-
 (generate_opam_files true)
-
-(source
- (github username/reponame))
-
-(authors "Author Name")
-
-(maintainers "Maintainer Name")
-
+(source (github dpv927/lenstra))
+(authors "dpv927")
+(maintainers "dpv927")
 (license LICENSE)
-
 (documentation https://url/to/documentation)
 
 (package
  (name lenstra)
- (synopsis "A short synopsis")
- (description "A longer description")
+ (synopsis "Lenstra Elliptic Curve Factorization")
+ (description "Lenstra Elliptic Curve Factorization")
  (depends ocaml dune)
- (tags
-  (topics "to describe" your project)))
-
-; See the complete stanza docs at https://dune.readthedocs.io/en/stable/reference/dune-project/index.html
+ (tags (topics "to describe" your project)))

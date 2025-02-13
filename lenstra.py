@@ -36,5 +36,8 @@ while iteration <= args.iterations:
         exit(0)
 
 
-# 
-print('End of procedure. Maybe ' + hex(n) + ' is prime or the generated curves are not ideal.')
+# At this point n may be a prime number or, alternatively,
+# none of its non-trivial factors have been involved in inverse
+# modulo operations.
+print('End of procedure. Maybe ' + hex(n) + 
+      ' is prime or the generated curves are not ideal.')

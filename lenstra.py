@@ -1,11 +1,11 @@
 from lib.curve import Curve
 from lib.point import Point
-import math
-import random
-import argparse
+from argparse import ArgumentParser
+from math import sqrt
+from random import randint
 
 
-parser = argparse.ArgumentParser()
+parser = ArgumentParser()
 parser.add_argument('-n', '--number', type=int, required=True, help='number to test')
 parser.add_argument('-i', '--iterations', type=int, default=100, help='max number of iterations')
 parser.add_argument('-v', '--verbose', action='store_true', help='activate extra logs')
@@ -16,8 +16,8 @@ iteration = 1
 
 while iteration <= args.iterations:
     try:
-        A = random.randint(1, n - 1)
-        B = random.randint(0, int(math.sqrt(n - 1)))
+        A = randint(1, n - 1)
+        B = randint(0, int(sqrt(n - 1)))
         curve = Curve(A, B, n)
         point = Point(0, pow(curve.b, 2))
 

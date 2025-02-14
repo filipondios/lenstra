@@ -1,4 +1,7 @@
 from lib.point import Point
+from random import randint
+from math import sqrt
+
 
 class Curve:
 
@@ -6,10 +9,18 @@ class Curve:
     a: int
     b: int
 
-    def __init__(self, a: int, b: int, modulo: int):
+    def __init__(self, modulo: int):
         self.modulo = modulo
-        self.a = a
-        self.b = b
+        
+        while True:
+            A = randint(1, self.modulo - 1)
+            B = randint(0, int(sqrt(self.modulo - 1)))
+
+            # 'a' and 'b' are valid if the curve they form is not singular
+            if (((4 * pow(A, 3)) + (27 * pow(B, 2))) % self.modulo) != 0:
+                self.a = A
+                self.b = B
+                return
 
 
     def add_points(self, p: Point, q: Point) -> Point:
@@ -45,8 +56,8 @@ class Curve:
             p = self.add_points(p, p)
             bit_mask <<= 1
         return sum
-    
-    
+
+
     def __str__(self):
         a = 'a = ' + hex(self.a) + '\n'
         b = 'b = ' + hex(self.b) + '\n'

@@ -1,5 +1,3 @@
-# Lenstra
-
 This python program attempts to find non-trivial factors of a given number using the [Lenstra elliptic-curve factorization](https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization) algorithm, and if so, report that the number is not prime. This algorithm is particularly effective for finding small factors of large composite numbers.
 
 ## Usage

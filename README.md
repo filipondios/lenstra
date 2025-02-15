@@ -28,7 +28,7 @@ This program does not require external packages as dependencies.
 
 ## References
 
-- [Corbellini, A. (2015, May 17). *Elliptic Curve Cryptography: A Gentle Introduction*](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/).
+- [Corbellini, A. (2015, May 17). *Elliptic Curve Cryptography: A Gentle Introduction*](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)
 - [RareSkills. (2024, August 26). *Group Theory*](https://www.rareskills.io/post/group-theory)
 - [RareSkills. (2023, September 26). *Elliptic Curve Addition*](https://www.rareskills.io/post/elliptic-curve-addition)
 - [Dattoli, G., Sabia, E., & Tata, A. (2024). *Mathematics*, 12(6), 881](https://www.mdpi.com/2227-7390/12/6/881)

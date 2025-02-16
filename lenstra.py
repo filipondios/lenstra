@@ -17,6 +17,10 @@ bases_str = { 'bin': bin, 'oct': oct, 'dec': str, 'hex': hex }
 n = int(args.number, bases_parse[args.base])
 iteration = 1
 
+k, number = 1, 2
+while k < n: k *= number; number += 1
+
+
 for iteration in range(args.iterations):
     try:
         curve = Curve(n)
@@ -26,8 +30,8 @@ for iteration in range(args.iterations):
             print('Iteration ' + str(iteration) + 
                 '. Using ' + str(curve) 
                 + 'And initial point = ' + str(point) + '\n')
-        
-        curve.mul_point(point, 30894)
+                    
+        curve.mul_point(point, k)
         iteration += 1
 
     except ValueError:

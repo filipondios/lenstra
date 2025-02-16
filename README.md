@@ -1,4 +1,5 @@
-This python program attempts to find non-trivial factors of a given number using the [Lenstra elliptic-curve factorization](https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization) algorithm, and if so, report that the number is not prime. This algorithm is particularly effective for finding small factors of large composite numbers.
+This is a very simple python program that attempts to find if a number is not prime using the [Lenstra elliptic-curve factorization](https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization) algorithm.
+This algorithm is particularly effective for finding small factors of large composite numbers.
 
 ## Usage
 Run the program with the required arguments:

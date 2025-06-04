@@ -1,5 +1,5 @@
 This is a very simple python program that attempts to find if a number is not prime using the [Lenstra elliptic-curve factorization](https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization) algorithm.
-This algorithm is particularly effective for finding small factors of large composite numbers.
+This makes it well-suited for the program’s purpose: determining if a number is not prime by finding small factors in large composite numbers.
 
 ## Usage
 Run the program with the required arguments:

@@ -21,8 +21,8 @@ python lenstra.py -n <number> [-i <iterations>] [-v] [-b <base>]
 
 ### Example
 
-The following execution will attempt to find factors of `5615377489327409283` (4DEDD4133315C883 in hexadecimal) 
-using up to `200` iterations with verbose logging enabled. Note that you can also write the hexadecimal 
+The following execution will attempt to find factors of 5615377489327409283 (4DEDD4133315C883 in hexadecimal) 
+using up to 200 iterations with verbose logging enabled. Note that you can also write the hexadecimal 
 digits in lowercase.
 
 ```

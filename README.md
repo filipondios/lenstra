@@ -25,8 +25,14 @@ The following execution will attempt to find factors of `5615377489327409283` (4
 using up to `200` iterations with verbose logging enabled. Note that you can also write the hexadecimal 
 digits in lowercase.
 
-```shell
-python lenstra.py -n 0x4DEDD4133315C883 -i 200 -v -b hex
+```
+# python lenstra.py -n 0x4DEDD4133315C883 -i 200 -v -b hex
+Iteration 0. Using curve y^2 = x^3 + ax + b where
+a = 0x32ff02ef747aab6c
+b = 0x207d0af3
+And initial point = (0x0, 0x41f7fd071c5e2a9)
+
+End of procedure: 0x4dedd4133315c883 is not prime.
 ```
 > [!IMPORTANT]  
 > The Lenstra algorithm is probabilistic and may not always find factors within the given iteration limit.

@@ -39,7 +39,7 @@ End of procedure: 0x4dedd4133315c883 is not prime.
 > For large numbers, increasing the iteration count may improve the chance of finding factors.
 
 You can take a look to this [standard curve database](https://neuromancer.sk/std/) and check the parameter `n`
-that are always prime numbers. For example, the result for `n` in the curve [P-384](https://neuromancer.sk/std/nist/P-384)
+that is always a prime numbers. For example, the result for `n` in the curve [P-384](https://neuromancer.sk/std/nist/P-384)
 is the following, telling the user that the number is prime or the generated curves are not ideal:
 
 ```

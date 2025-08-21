@@ -15,7 +15,7 @@ python lenstra.py -n <number> [-i <iterations>] [-v] [-b <base>]
 | Argument | Optional                | Description                                                                      |
 |:--------:|:-----------------------:|----------------------------------------------------------------------------------|
 | `-n`     | :x:                     | The number to test                                                               |
-| `-i`     | :white_check_mark:      | The maximum number of iterations for the algorithm                               |
+| `-i`     | :white_check_mark:      | The maximum number of iterations                                                 |
 | `-b`     | :white_check_mark:      | Base of the number to test (binary=bin, octal=oct, decimal=dec, hexadecimal=hex) |
 | `-v`     | :white_check_mark:      | Enables extra logging for debugging and detailed output                          |
 

@@ -12,12 +12,12 @@ python lenstra.py -n <number> [-i <iterations>] [-v] [-b <base>]
 
 ### Arguments
 
-| Argument           | Optional                | Description                                                                      |
-|--------------------|:-----------------------:|----------------------------------------------------------------------------------|
-| `-n, --number`     | :x:                     | The number to test                                                               |
-| `-i, --iterations` | :white_check_mark:      | The maximum number of iterations for the algorithm                               |
-| `-b, --base`       | :white_check_mark:      | Base of the number to test (binary=bin, octal=oct, decimal=dec, hexadecimal=hex) |
-| `-v, --verbose`    | :white_check_mark:      | Enables extra logging for debugging and detailed output                          |
+| Argument | Optional                | Description                                                                      |
+|:--------:|:-----------------------:|----------------------------------------------------------------------------------|
+| `-n`     | :x:                     | The number to test                                                               |
+| `-i`     | :white_check_mark:      | The maximum number of iterations for the algorithm                               |
+| `-b`     | :white_check_mark:      | Base of the number to test (binary=bin, octal=oct, decimal=dec, hexadecimal=hex) |
+| `-v`     | :white_check_mark:      | Enables extra logging for debugging and detailed output                          |
 
 ### Example
 

@@ -1,1 +1,5 @@
-lib/__pycache__/
+bin/
+obj/
+.vs/
+*.user
+TestResults/

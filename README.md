@@ -1,67 +1,86 @@
 # Lenstra
 
-This is a very simple python program (without dependencies) that attempts to find if a number is not prime using the [Lenstra elliptic-curve factorization](https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization) algorithm.
-Using Lenstra helps this program purpose: determining if a number is not prime by finding small factors in large composite numbers.
+A dependency-free integer factorization tool in Python. Given a number `n`, it
+returns its prime factorization using [Miller–Rabin](https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test), [trial division](https://en.wikipedia.org/wiki/Trial_division), [Pollard rho](https://en.wikipedia.org/wiki/Pollard%27s_rho_algorithm) and [elliptic-curve factorization](https://en.wikipedia.org/wiki/Lenstra_elliptic-curve_factorization) (ECM).
 
 ## Usage
-Run the program with the required arguments:
 
 ```bash
-python lenstra.py -n <number> [-i <iterations>] [-v] [-b <base>]
+python lenstra.py -n <number> [options]
 ```
 
-### Arguments
+| Option | Default | Description |
+|:--|:--|:--|
+| `-n`, `--number` | required | Number to factorize |
+| `-b`, `--base` | `dec` | Input base: `bin`, `oct`, `dec`, `hex` (prefixes `0x`, `0b`, `0o` are accepted) |
+| `-c`, `--curves` | `100` | Maximum number of ECM curves |
+| `--b1` | `10000` | ECM smoothness bound: `k = lcm(1..B1)` |
+| `--rounds` | `40` | Miller–Rabin rounds for `n >= 2^64` |
+| `--seed` | random | Seed for the random generator, to reproduce a run |
+| `-v`, `--verbose` | off | Print each ECM curve and the elapsed time |
+| `--json` | off | Emit structured JSON output |
 
-| Argument | Optional                | Description                                                                      |
-|:--------:|:-----------------------:|----------------------------------------------------------------------------------|
-| `-n`     | :x:                     | The number to test                                                               |
-| `-i`     | :white_check_mark:      | The maximum number of iterations                                                 |
-| `-b`     | :white_check_mark:      | Base of the number to test (binary=bin, octal=oct, decimal=dec, hexadecimal=hex) |
-| `-v`     | :white_check_mark:      | Enables extra logging for debugging and detailed output                          |
+### Examples
 
-### Example
+```console
+$ python lenstra.py -n 561
+561 = 3 * 11 * 17  (composite, verified with Miller-Rabin)
 
-The following execution will attempt to find factors of 5615377489327409283 (4DEDD4133315C883 in hexadecimal) 
-using up to 200 iterations with verbose logging enabled. Note that you can also write the hexadecimal 
-digits in lowercase.
+$ python lenstra.py -n 104729
+104729 is prime (Miller-Rabin).
 
-```
-# python lenstra.py -n 0x4DEDD4133315C883 -i 200 -v -b hex
-Iteration 0. Using curve y^2 = x^3 + ax + b where
-a = 0x32ff02ef747aab6c
-b = 0x207d0af3
-And initial point = (0x0, 0x41f7fd071c5e2a9)
+$ python lenstra.py -n 1024
+1024 = 2^10  (composite, verified with Miller-Rabin)
 
-End of procedure: 0x4dedd4133315c883 is not prime.
-```
-> [!IMPORTANT]  
-> The Lenstra algorithm is probabilistic and may not always find factors within the given iteration limit.
-> For large numbers, increasing the iteration count may improve the chance of finding factors.
+$ python lenstra.py -n 0x4DEDD4133315C883 -b hex
+0x4dedd4133315c883 = 0x3 * 0x3a86e5 * 0x719f36a66d  (composite, verified with Miller-Rabin)
 
-You can take a look to this [standard curve database](https://neuromancer.sk/std/) and check the parameter `n`
-that is always a prime numbers. For example, the result for `n` in the curve [P-384](https://neuromancer.sk/std/nist/P-384)
-is the following, telling the user that the number is prime or the generated curves are not ideal:
-
-```
-# python lenstra.py -n 0x2f40e7e2221f295de297117b7f3d62f5c6a97ffcb8ceff1cd6ba8ce4a9a18ad84ffabbd8efa59332be7ad6756a66e294afd185a78ff12aa520e4de739baca0c7ffeff7f2955727a -i 200 -v -b hex
-
-Iteration 0. Using curve y^2 = x^3 + ax + b where
-a = 0x15ac38993d6ec26cd4fb822431d55579018b1e66ee161d22cbe1e7bc97aecbf30c216c1e62a5491a20515bc15d50e4cd47706602c2396e043c4c99c2653a1501fb78d072b04efbe
-b = 0x13672480fc341c9fc25ce483c3184e7b7c4df03b826ef558f15072ef96c19d8c82e43931
-And initial point = (0x0, 0x17878f98a6f361a9408620e18e759aefcc3859bc560deda983124f4e7645228bf64fb79234576b23aeac76db7e3f7b6851b19539974cc14095b660141e8e24d02933d23b00edb61)
-...
-
-Iteration 199. Using curve y^2 = x^3 + ax + b where
-a = 0x11c66eb9841dcc60d0cf5d15278b7fe54ed78cb0fd2c8e91562701868a68dd56f5ed580221734837d46337608fa86576960968e0635de019c215fd55d1e87fb2d409d3efab7dde9
-b = 0x15fe529f56c633d7b1df33a111f40b364da437089c47731ad61074c1fa9a8717abe1a975
-And initial point = (0x0, 0x1e3b63633172c942407ed8df88fbe41111cc4d3345eefcaeb99ae707a6569daff7cacc12ababf30bf2c515747f70438007cfaefd6abfb82920d9fdf81ed0e5abb7118539dd5af79)
-
-End of procedure. Maybe 0x3ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffe661ce18ff55987308059b186823851ec7dd9ca1161de93d5174d66e8382e9bb2fe84e47 is prime or the generated curves are not ideal.
+$ python lenstra.py -n 1000036000099 --json
+{"number": 1000036000099, "prime": false, "factors": {"1000003": 1, "1000033": 1}, "b1": 10000, "curves": 100, "seconds": 0.0009}
 ```
 
-## References
+The base selected with `-b` also applies to the printed factors. In `--json`
+output every number is decimal.
 
-- [Corbellini, A. (2015, May 17). *Elliptic Curve Cryptography: A Gentle Introduction*](https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/)
-- [RareSkills. (2024, August 26). *Group Theory*](https://www.rareskills.io/post/group-theory)
-- [RareSkills. (2023, September 26). *Elliptic Curve Addition*](https://www.rareskills.io/post/elliptic-curve-addition)
-- [Dattoli, G., Sabia, E., & Tata, A. (2024). *Mathematics*, 12(6), 881](https://www.mdpi.com/2227-7390/12/6/881)
+### Exit codes
+
+| Code | Meaning |
+|:--|:--|
+| 0 | Factorization completed, or the number is prime |
+| 1 | No complete factorization within `--b1`/`--curves`; the message suggests larger values |
+| 2 | Invalid input (argparse) |
+
+## How it works
+
+Miller–Rabin does not factor: it is a primality test. The tool uses it as the
+first filter, then tries three methods in this order:
+
+1. **Miller–Rabin**: is `n` prime? If so, stop. For `n < 2^64` it uses 7 fixed
+   bases and the result is deterministic. For `n >= 2^64` it uses `rounds` random
+   bases (40 by default), so a "prime" answer is probabilistic: the error is at
+   most `4^-rounds`. A "composite" answer is always certain, because a single
+   failing base proves compositeness.
+2. **Trial division**: divide by integers up to 1000.
+3. **Pollard rho**: look for factors with `f(x) = x^2 + c`, trying `c = 1..10`.
+4. **ECM (Lenstra)**: build curves `y^2 = x^3 + ax + b` modulo `n`, with a point
+   that lies on the curve, and multiply it by `k = lcm(1..B1)`. When a modular
+   inverse does not exist, the `gcd` reveals a factor.
+
+Whenever a factor appears, the process repeats on that factor and on `n // factor`
+until every piece is prime. Before returning, the tool checks that the product of
+the factors, including their exponents, equals `n`.
+
+
+## Development
+
+```bash
+uv run --with pytest pytest -q
+```
+
+GitHub Actions runs the same command on every push and pull request
+([.github/workflows/tests.yml](.github/workflows/tests.yml)). The library is stored in [lib](lib/) and [lenstra.py](lenstra.py) is the
+CLI.
+
+## License
+
+GPL-2.0. See [LICENSE](LICENSE).

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "lenstra"
+version = "1.0.0"
+description = "Integer factorization with Miller-Rabin, Pollard rho and ECM"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+
+[project.scripts]
+factorizador = "lenstra:main"
+
+[tool.setuptools]
+py-modules = ["lenstra"]
+
+[tool.setuptools.packages.find]
+include = ["lib*"]

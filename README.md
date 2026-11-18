@@ -23,18 +23,25 @@ python lenstra.py -n <number> [options]
 ### Examples
 
 ```console
+# testing a composite number
 $ python lenstra.py -n 561
 561 = 3 * 11 * 17  (composite, verified with Miller-Rabin)
+```
 
+```console
+# testing a prime number
 $ python lenstra.py -n 104729
 104729 is prime (Miller-Rabin).
+```
 
-$ python lenstra.py -n 1024
-1024 = 2^10  (composite, verified with Miller-Rabin)
-
+```console
+# using hexadecimal format to test a composite number
 $ python lenstra.py -n 0x4DEDD4133315C883 -b hex
 0x4dedd4133315c883 = 0x3 * 0x3a86e5 * 0x719f36a66d  (composite, verified with Miller-Rabin)
+```
 
+```console
+# using the json option for json structured output
 $ python lenstra.py -n 1000036000099 --json
 {"number": 1000036000099, "prime": false, "factors": {"1000003": 1, "1000033": 1}, "b1": 10000, "curves": 100, "seconds": 0.0009}
 ```
